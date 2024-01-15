@@ -1,0 +1,943 @@
+swagger: '2.0'
+info:
+  title: ''
+  description: |
+    <img alt="Logo" style="width:200px" src="https://payments.smsdata.com/media/uploaded_images/Logo_Bitnovo_test_-_BU_341.png" /> 
+
+     <p><span style="font-size:11pt"><span style="font-family:Arial"><span style="color:#000000">Bitnovo crypto gateway is designed to be use in two different ways:</span></span></span></p>
+
+    <ol>
+        <li style="list-style-type:decimal"><span style="font-size:11pt"><span style="font-family:Arial"><span style="color:#000000"><strong>Redirect Gateway</strong></span></span></span><span style="font-size:11pt"><span style="font-family:Arial"><span style="color:#000000">: Only available for online payments. The user is redirected to the bitnovo environment where the user is assisted to make the crypto payment. And depending on the merchant configuration is returned to the merchant environment when the transaction is detected or confirmed.</span></span></span></li>
+        <li style="list-style-type:decimal"><span style="font-size:11pt"><span style="font-family:Arial"><span style="color:#000000"><strong>API Gateway</strong></span></span></span><span style="font-size:11pt"><span style="font-family:Arial"><span style="color:#000000">: available for online and offline payments. The merchant/ payment provider receives the payment information from Bitnovo and it is shown by the merchant to the user.</span></span></span></li>
+    </ol>
+
+    <p>&nbsp;</p>
+
+    <p><span style="font-size:11pt"><span style="font-family:Arial"><span style="color:#000000"><strong>Redirect Gateway</strong></span></span></span></p>
+
+    <p><span style="font-size:11pt"><span style="font-family:Arial"><span style="color:#000000">There are also two options to use the gateway in this mode:</span></span></span></p>
+
+    <p>&nbsp;</p>
+
+    <ol>
+        <li style="list-style-type:decimal"><span style="font-size:11pt"><span style="font-family:Arial"><span style="color:#000000">Indicating the cryptocurrency symbol</span></span></span></li>
+    </ol>
+
+    <p><span style="font-size:11pt"><span style="font-family:Arial"><span style="color:#000000">The process begins when the merchant calls the currencies_list endpoint. To ensure that the currency it wants to show it is available at this moment.&nbsp;</span></span></span></p>
+
+    <p><span style="font-size:11pt"><span style="font-family:Arial"><span style="color:#000000">Once confirmed, the merchant calls the orders_create endpoint. Stating the fiat amount, the cryptocurrency symbol, OK and KO URLs and an optional description for the payment.</span></span></span></p>
+
+    <p><span style="font-size:11pt"><span style="font-family:Arial"><span style="color:#000000">Then, bitnovo answers with the redirection url and the merchant moves the user to the redirection url.</span></span></span></p>
+
+    <p><span style="font-size:11pt"><span style="font-family:Arial"><span style="color:#000000">Then, the users try to make the payment in bitnovo&rsquo;s environment.</span></span></span></p>
+
+    <p><span style="font-size:11pt"><span style="font-family:Arial"><span style="color:#000000">When the user ends the payment process, he is redirected to the OK or KO url depending on the result.</span></span></span></p>
+
+    <p>&nbsp;</p>
+
+    <ol start="2">
+        <li style="list-style-type:decimal"><span style="font-size:11pt"><span style="font-family:Arial"><span style="color:#000000">Not indicating the cryptocurrency symbol</span></span></span></li>
+    </ol>
+
+    <p><span style="font-size:11pt"><span style="font-family:Arial"><span style="color:#000000">The process begins when the merchant calls the orders_create endpoint. Sending the fiat amount and OK and KO URLs and an optional description for the payment.</span></span></span></p>
+
+    <p><span style="font-size:11pt"><span style="font-family:Arial"><span style="color:#000000">Then, bitnovo answers with the redirection url and the merchant moves the user to the redirection url.</span></span></span></p>
+
+    <p><span style="font-size:11pt"><span style="font-family:Arial"><span style="color:#000000">Then, the users try to make the payment in bitnovo&rsquo;s environment once he has chosen the currency.</span></span></span></p>
+
+    <p><span style="font-size:11pt"><span style="font-family:Arial"><span style="color:#000000">When the user ends the payment process, he is redirected to the OK or KO url depending on the result.</span></span></span></p>
+
+    <p><span style="font-size:11pt"><span style="font-family:Arial"><span style="color:#000000">In both cases, the merchant will be notified the status changes through the notify_merchant webhook</span></span></span></p>
+
+    <p>&nbsp;</p>
+
+    <p><span style="font-size:11pt"><span style="font-family:Arial"><span style="color:#000000"><strong>API Gateway</strong></span></span></span><span style="font-size:11pt"><span style="font-family:Arial"><span style="color:#000000">&nbsp;</span></span></span></p>
+
+    <p><span style="font-size:11pt"><span style="font-family:Arial"><span style="color:#000000">The process begins when the merchant calls the orders_create endpoint. Sending the fiat amount, the cryptocurrency symbol and an optional description of the payment. Then, Bitnovo answers with the payment information.</span></span></span></p>
+
+    <p><span style="font-size:11pt"><span style="font-family:Arial"><span style="color:#000000">The payment information has to be shown to the user by the merchant, during the payment process Bitnovo will inform the merchant about the process status updates by the notify_merchant webhook.</span></span></span></p>
+
+    <p>&nbsp;</p>
+
+    <p><span style="font-size:11pt"><span style="font-family:Arial"><span style="color:#000000"><strong>Status description</strong></span></span></span></p>
+
+    <div>
+    <table cellspacing="0" style="border-collapse:collapse; border:none; width:601px">
+        <tbody>
+            <tr>
+                <td style="border-bottom:2px solid #000000; border-left:2px solid #000000; border-right:2px solid #000000; border-top:2px solid #000000; vertical-align:top; width:62px">
+                <p><span style="font-size:11pt"><span style="font-family:Arial"><span style="color:#000000"><strong>Code</strong></span></span></span></p>
+                </td>
+                <td style="border-bottom:2px solid #000000; border-left:2px solid #000000; border-right:2px solid #000000; border-top:2px solid #000000; vertical-align:top; width:169px">
+                <p><span style="font-size:11pt"><span style="font-family:Arial"><span style="color:#000000"><strong>Name</strong></span></span></span></p>
+                </td>
+                <td style="border-bottom:2px solid #000000; border-left:2px solid #000000; border-right:2px solid #000000; border-top:2px solid #000000; vertical-align:top; width:400px">
+                <p><span style="font-size:11pt"><span style="font-family:Arial"><span style="color:#000000"><strong>Description</strong></span></span></span></p>
+                </td>
+            </tr>
+            <tr>
+                <td style="border-bottom:2px solid #000000; border-left:2px solid #000000; border-right:2px solid #000000; border-top:2px solid #000000; vertical-align:top; width:62px">
+                <p><span style="font-size:11pt"><span style="font-family:Arial"><span style="color:#000000">&quot;NR&quot;</span></span></span></p>
+                </td>
+                <td style="border-bottom:2px solid #000000; border-left:2px solid #000000; border-right:2px solid #000000; border-top:2px solid #000000; vertical-align:top; width:169px">
+                <p><span style="font-size:11pt"><span style="font-family:Arial"><span style="color:#000000">&quot;Not Ready&quot;</span></span></span></p>
+                </td>
+                <td style="border-bottom:2px solid #000000; border-left:2px solid #000000; border-right:2px solid #000000; border-top:2px solid #000000; vertical-align:top; width:400px">
+                <p><span style="font-size:11pt"><span style="font-family:Arial"><span style="color:#000000">The payment didn&#39;t receive a cryptocurrency symbol yet. (Redirect Gateway Only)</span></span></span></p>
+                </td>
+            </tr>
+            <tr>
+                <td style="border-bottom:2px solid #000000; border-left:2px solid #000000; border-right:2px solid #000000; border-top:2px solid #000000; vertical-align:top; width:52px">
+                <p><span style="font-size:11pt"><span style="font-family:Arial"><span style="color:#000000">&quot;PE&quot;</span></span></span></p>
+                </td>
+                <td style="border-bottom:2px solid #000000; border-left:2px solid #000000; border-right:2px solid #000000; border-top:2px solid #000000; vertical-align:top; width:159px">
+                <p><span style="font-size:11pt"><span style="font-family:Arial"><span style="color:#000000">&quot;Pending&quot;</span></span></span></p>
+                </td>
+                <td style="border-bottom:2px solid #000000; border-left:2px solid #000000; border-right:2px solid #000000; border-top:2px solid #000000; vertical-align:top; width:390px">
+                <p><span style="font-size:11pt"><span style="font-family:Arial"><span style="color:#000000">The payment is waiting to receive the cryptocurrency amount.</span></span></span></p>
+                </td>
+            </tr>
+            <tr>
+                <td style="border-bottom:2px solid #000000; border-left:2px solid #000000; border-right:2px solid #000000; border-top:2px solid #000000; vertical-align:top; width:52px">
+                <p><span style="font-size:11pt"><span style="font-family:Arial"><span style="color:#000000">&quot;AC&quot;&nbsp;</span></span></span></p>
+                </td>
+                <td style="border-bottom:2px solid #000000; border-left:2px solid #000000; border-right:2px solid #000000; border-top:2px solid #000000; vertical-align:top; width:159px">
+                <p><span style="font-size:11pt"><span style="font-family:Arial"><span style="color:#000000">&quot;Awaiting Completion&quot;</span></span></span></p>
+                </td>
+                <td style="border-bottom:2px solid #000000; border-left:2px solid #000000; border-right:2px solid #000000; border-top:2px solid #000000; vertical-align:top; width:390px">
+                <p><span style="font-size:11pt"><span style="font-family:Arial"><span style="color:#000000">The cryptocurrency amount has been detected in the meempool but not confirmed yet.</span></span></span></p>
+                </td>
+            </tr>
+            <tr>
+                <td style="border-bottom:2px solid #000000; border-left:2px solid #000000; border-right:2px solid #000000; border-top:2px solid #000000; vertical-align:top; width:52px">
+                <p><span style="font-size:11pt"><span style="font-family:Arial"><span style="color:#000000">&quot;IA&quot;</span></span></span></p>
+                </td>
+                <td style="border-bottom:2px solid #000000; border-left:2px solid #000000; border-right:2px solid #000000; border-top:2px solid #000000; vertical-align:top; width:159px">
+                <p><span style="font-size:11pt"><span style="font-family:Arial"><span style="color:#000000">&quot;Insufficient Amount&quot;</span></span></span></p>
+                </td>
+                <td style="border-bottom:2px solid #000000; border-left:2px solid #000000; border-right:2px solid #000000; border-top:2px solid #000000; vertical-align:top; width:390px">
+                <p><span style="font-size:11pt"><span style="font-family:Arial"><span style="color:#000000">The cryptocurrency amount is lower than the required.</span></span></span></p>
+                </td>
+            </tr>
+            <tr>
+                <td style="border-bottom:2px solid #000000; border-left:2px solid #000000; border-right:2px solid #000000; border-top:2px solid #000000; vertical-align:top; width:52px">
+                <p><span style="font-size:11pt"><span style="font-family:Arial"><span style="color:#000000">&quot;CO&quot;</span></span></span></p>
+                </td>
+                <td style="border-bottom:2px solid #000000; border-left:2px solid #000000; border-right:2px solid #000000; border-top:2px solid #000000; vertical-align:top; width:159px">
+                <p><span style="font-size:11pt"><span style="font-family:Arial"><span style="color:#000000">&quot;Completed&quot;</span></span></span></p>
+                </td>
+                <td style="border-bottom:2px solid #000000; border-left:2px solid #000000; border-right:2px solid #000000; border-top:2px solid #000000; vertical-align:top; width:390px">
+                <p><span style="font-size:11pt"><span style="font-family:Arial"><span style="color:#000000">The cryptocurrency amount has at least 1 confirmation in the blockchain.</span></span></span></p>
+                </td>
+            </tr>
+            <tr>
+                <td style="border-bottom:2px solid #000000; border-left:2px solid #000000; border-right:2px solid #000000; border-top:2px solid #000000; vertical-align:top; width:52px">
+                <p><span style="font-size:11pt"><span style="font-family:Arial"><span style="color:#000000">&quot;RF&quot;&nbsp;</span></span></span></p>
+                </td>
+                <td style="border-bottom:2px solid #000000; border-left:2px solid #000000; border-right:2px solid #000000; border-top:2px solid #000000; vertical-align:top; width:159px">
+                <p><span style="font-size:11pt"><span style="font-family:Arial"><span style="color:#000000">&quot;Refunded&quot;</span></span></span></p>
+                </td>
+                <td style="border-bottom:2px solid #000000; border-left:2px solid #000000; border-right:2px solid #000000; border-top:2px solid #000000; vertical-align:top; width:390px">
+                <p><span style="font-size:11pt"><span style="font-family:Arial"><span style="color:#000000">Payment refunded to customer.</span></span></span></p>
+                </td>
+            </tr>
+            <tr>
+                <td style="border-bottom:2px solid #000000; border-left:2px solid #000000; border-right:2px solid #000000; border-top:2px solid #000000; vertical-align:top; width:52px">
+                <p><span style="font-size:11pt"><span style="font-family:Arial"><span style="color:#000000">&quot;CA&quot;</span></span></span></p>
+                </td>
+                <td style="border-bottom:2px solid #000000; border-left:2px solid #000000; border-right:2px solid #000000; border-top:2px solid #000000; vertical-align:top; width:159px">
+                <p><span style="font-size:11pt"><span style="font-family:Arial"><span style="color:#000000">&quot;Cancelled&quot;</span></span></span></p>
+                </td>
+                <td style="border-bottom:2px solid #000000; border-left:2px solid #000000; border-right:2px solid #000000; border-top:2px solid #000000; vertical-align:top; width:390px">
+                <p><span style="font-size:11pt"><span style="font-family:Arial"><span style="color:#000000">The payment was expired for more than 24 hours.</span></span></span></p>
+                </td>
+            </tr>
+            <tr>
+                <td style="border-bottom:2px solid #000000; border-left:2px solid #000000; border-right:2px solid #000000; border-top:2px solid #000000; vertical-align:top; width:52px">
+                <p><span style="font-size:11pt"><span style="font-family:Arial"><span style="color:#000000">&quot;EX&quot;</span></span></span></p>
+                </td>
+                <td style="border-bottom:2px solid #000000; border-left:2px solid #000000; border-right:2px solid #000000; border-top:2px solid #000000; vertical-align:top; width:159px">
+                <p><span style="font-size:11pt"><span style="font-family:Arial"><span style="color:#000000">&quot;Expired&quot;</span></span></span></p>
+                </td>
+                <td style="border-bottom:2px solid #000000; border-left:2px solid #000000; border-right:2px solid #000000; border-top:2px solid #000000; vertical-align:top; width:390px">
+                <p><span style="font-size:11pt"><span style="font-family:Arial"><span style="color:#000000">The payment didn&#39;t receive any crypto during the expiration time (15 minutes).</span></span></span></p>
+                </td>
+            </tr>
+            <tr>
+                <td style="border-bottom:2px solid #000000; border-left:2px solid #000000; border-right:2px solid #000000; border-top:2px solid #000000; vertical-align:top; width:52px">
+                <p><span style="font-size:11pt"><span style="font-family:Arial"><span style="color:#000000">&quot;OC&quot;</span></span></span></p>
+                </td>
+                <td style="border-bottom:2px solid #000000; border-left:2px solid #000000; border-right:2px solid #000000; border-top:2px solid #000000; vertical-align:top; width:159px">
+                <p><span style="font-size:11pt"><span style="font-family:Arial"><span style="color:#000000">&quot;Out of Condition&quot;</span></span></span></p>
+                </td>
+                <td style="border-bottom:2px solid #000000; border-left:2px solid #000000; border-right:2px solid #000000; border-top:2px solid #000000; vertical-align:top; width:390px">
+                <p><span style="font-size:11pt"><span style="font-family:Arial"><span style="color:#000000">The payment does not satify one of this conditions. Paid on time or full amount.</span></span></span></p>
+                </td>
+            </tr>
+            <tr>
+                <td style="border-bottom:2px solid #000000; border-left:2px solid #000000; border-right:2px solid #000000; border-top:2px solid #000000; vertical-align:top; width:52px">
+                <p><span style="font-size:11pt"><span style="font-family:Arial"><span style="color:#000000">&quot;FA&quot;&nbsp;</span></span></span></p>
+                </td>
+                <td style="border-bottom:2px solid #000000; border-left:2px solid #000000; border-right:2px solid #000000; border-top:2px solid #000000; vertical-align:top; width:159px">
+                <p><span style="font-size:11pt"><span style="font-family:Arial"><span style="color:#000000">&quot;Failed&quot;</span></span></span></p>
+                </td>
+                <td style="border-bottom:2px solid #000000; border-left:2px solid #000000; border-right:2px solid #000000; border-top:2px solid #000000; vertical-align:top; width:390px">
+                <p><span style="font-size:11pt"><span style="font-family:Arial"><span style="color:#000000">Payment has failed because the transaction dind't confirm.</span></span></span></p>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    </div>
+
+    <p>&nbsp;</p>
+
+    <p><span style="font-size:11pt"><span style="font-family:Arial"><span style="color:#000000"><strong>Notify Merchant Webhook</strong></span></span></span></p>
+
+    <p><span style="font-size:11pt"><span style="font-family:Arial"><span style="color:#000000">● Description: Notify the merchant with any payment status change.</span></span></span></p>
+
+    <p><span style="font-size:11pt"><span style="font-family:Arial"><span style="color:#000000">● Url: The ulr notification provided by the merchant.</span></span></span></p>
+
+    <p><span style="font-size:11pt"><span style="font-family:Arial"><span style="color:#000000">● Method: POST</span></span></span></p>
+
+    <p><span style="font-size:11pt"><span style="font-family:Arial"><span style="color:#000000">● Header: The following fields:</span></span></span></p>
+
+    <p style="margin-left:29px"><span style="font-size:11pt"><span style="font-family:Arial"><span style="color:#000000">○ &lsquo;X-NONCE&rsquo;: Unix Timestamp.</span></span></span></p>
+
+    <p style="margin-left:29px"><span style="font-size:11pt"><span style="font-family:Arial"><span style="color:#000000">○ &lsquo;X-SIGNATURE&rsquo;: hexadecimal(hmac_sha256(merchant_secret_key, nonce + body)).</span></span></span></p>
+
+    <p style="margin-left:29px"><span style="font-size:11pt"><span style="font-family:Arial"><span style="color:#000000"><u>Important:</u></span></span></span><span style="font-size:11pt"><span style="font-family:Arial"><span style="color:#000000"> In order to verify that the body information is correct, the merchant must create a signature with the formula previously shown and compare it with the X-SIGNATURE received in the header. Also is recommended to reject the body information if there has been an elapsed time of 15/20 seconds since the Unix Timestamp.</span></span></span></p>
+
+    <p><span style="font-size:11pt"><span style="font-family:Arial"><span style="color:#000000">● Output data: JSON with all the payment information.</span></span></span></p>
+
+    <p><span style="font-size:11pt"><span style="font-family:Arial"><span style="color:#000000">JSON example:</span></span></span></p>
+
+    <p><span style="font-size:12px"><span style="font-family:Arial"><span style="color:#000000"><em>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{&nbsp;&nbsp; &nbsp; &quot;fiat_amount&quot;: 5.0,</em></span></span></span></p>
+
+    <p><span style="font-size:12px"><span style="font-family:Arial"><span style="color:#000000"><em>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &quot;status&quot;: &quot;AC&quot;,</em></span></span></span></p>
+
+    <p><span style="font-size:12px"><span style="font-family:Arial"><span style="color:#000000"><em>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &quot;crypto_amount&quot;: 0.06519511,</em></span></span></span></p>
+
+    <p><span style="font-size:12px"><span style="font-family:Arial"><span style="color:#000000"><em>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &quot;unconfirmed_amount&quot;: 0.770000002,</em></span></span></span></p>
+
+    <p><span style="font-size:12px"><span style="font-family:Arial"><span style="color:#000000"><em>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &quot;confirmed_amount&quot;: 0.0,</em></span></span></span></p>
+
+    <p><span style="font-size:12px"><span style="font-family:Arial"><span style="color:#000000"><em>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &quot;currency&quot;: &quot;DASH&quot;,</em></span></span></span></p>
+
+    <p><span style="font-size:12px"><span style="font-family:Arial"><span style="color:#000000"><em>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &quot;identifier&quot;: &quot;cc80e0b5-f779-4094-be65-fcee4b5bd041&quot;&nbsp; &nbsp; &nbsp;}</em></span></span></span></p>
+
+    <p><span style="font-size:11pt"><span style="font-family:Arial"><span style="color:#000000">Example for the X-SIGNATURE verification.</span></span></span></p>
+
+    <ul>
+        <li style="list-style-type:disc"><span style="font-size:11pt"><span style="font-family:Arial"><span style="color:#000000">Body:</span></span></span></li>
+    </ul>
+
+    <p><span style="font-size:12px"><span style="font-family:Arial"><span style="color:#000000"><em>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {&nbsp; &nbsp; &nbsp; </em></span></span></span><span style="font-size:12px"><span style="font-family:Arial"><span style="color:#000000"><em>&quot;fiat_amount&quot;: 100.0,</em></span></span></span></p>
+
+    <p><span style="font-size:12px"><span style="font-family:Arial"><span style="color:#000000"><em>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &quot;status&quot;: &quot;AC&quot;,</em></span></span></span></p>
+
+    <p><span style="font-size:12px"><span style="font-family:Arial"><span style="color:#000000"><em>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &quot;crypto_amount&quot;: 1.21461894,</em></span></span></span></p>
+
+    <p><span style="font-size:12px"><span style="font-family:Arial"><span style="color:#000000"><em>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &quot;unconfirmed_amount&quot;: 8.0,</em></span></span></span></p>
+
+    <p><span style="font-size:12px"><span style="font-family:Arial"><span style="color:#000000"><em>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&quot;confirmed_amount&quot;: 0.0,</em></span></span></span></p>
+
+    <p><span style="font-size:12px"><span style="font-family:Arial"><span style="color:#000000"><em>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&quot;currency&quot;: &quot;DASH&quot;,</em></span></span></span></p>
+
+    <p><span style="font-size:12px"><span style="font-family:Arial"><span style="color:#000000"><em>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&quot;identifier&quot;: &quot;1040095a-737d-41a2-a2e1-d031d19ec8cd&quot;&nbsp; &nbsp;&nbsp;</em></span></span></span><span style="font-size:12px"><span style="font-family:Arial"><span style="color:#000000"><em>}</em></span></span></span></p>
+
+    <ul>
+        <li style="list-style-type:disc"><span style="font-size:11pt"><span style="font-family:Arial"><span style="color:#000000">Nonce:</span></span></span></li>
+    </ul>
+
+    <p style="margin-left:5px"><span style="font-size:10pt"><span style="font-family:Arial"><span style="color:#000000"><em>&quot;1645634942&quot;</em></span></span></span></p>
+
+    <ul>
+        <li style="list-style-type:disc"><span style="font-size:11pt"><span style="font-family:Arial"><span style="color:#000000">Merchant Secret Key:</span></span></span></li>
+    </ul>
+
+    <p style="margin-left:5px"><span style="font-size:10pt"><span style="font-family:Arial"><span style="color:#000000"><em>bytes.fromhex(&quot;02d4b921007cad413e79731dd02b3267cd43a14d150a0ae6a1c651942122bb62&quot;)</em></span></span></span></p>
+
+    <ul>
+        <li style="list-style-type:disc"><span style="font-size:11pt"><span style="font-family:Arial"><span style="color:#000000">X-SIGNATURE hexadecimal(hmac_sha256(merchant_secret_key, nonce + body)):</span></span></span></li>
+    </ul>
+
+    <p style="margin-left:5px"><span style="font-size:10pt"><span style="font-family:Arial"><span style="color:#000000"><em>&quot;ff2ac6c50f09916783f1192c35e7f169a14a806e944827b9136bf1406ade8c9d&quot;</em></span></span></span></p>
+
+    <p>&nbsp;</p>
+
+    <p>Remember to just use testnet cryptocurrency for Bitnovo Payment Test. We have available the following cryptocurrencies:<br />
+    &nbsp; &nbsp; - Bitcoin Test<br />
+    &nbsp; &nbsp; - Ripple (XRP) Test<br />
+    &nbsp; &nbsp; - Ethereum Test (Goerli)<br />
+    &nbsp; &nbsp; - USD Coin (Goerli): There are multiple USDC contracts on Goerli, the one we use is: 0x07865c6E87B9F70255377e024ace6630C1Eaa37F</p>
+
+    <p><br />
+    note: It is possible that with Bitcoin Test you will receive block=0 when a transaction is confirmed. Do not worry, in Bitcoin Mainnet you will always receive the real block.</p>
+  version: ''
+host: payments.pre-bnvo.com
+schemes:
+  - https
+basePath: /api/v1
+consumes:
+  - application/json
+produces:
+  - application/json
+securityDefinitions:
+  Basic:
+    type: basic
+security:
+  - Basic: []
+paths:
+  /currencies:
+    get:
+      operationId: currencies_list
+      description: |-
+        ● Description: Returns a list of all cryptocurrencies available for payments.
+
+        ● Header: The ‘X-Device-Id’ from the Merchant. You will find it on Bitnovo Pay Dashbaord.
+
+        ● VERY IMPORTANT: There are currencies such as XRP, XLM and ALGO that use TAG/MEMO, in the case of using Api-Gateway, 
+                it is very important to show this information to the client to make the payment. Otherwise, if the customer does not
+                enter the TAG/MEMO along with the address and amount, the customer's funds will be lost.
+      parameters: []
+      responses:
+        '200':
+          description: Successful operation.
+          schema:
+            $ref: '#/definitions/Currency'
+        '403':
+          description: The authentication credentials where not provided.
+        '500':
+          description: Some internal error happened. Try again or, if the problem persists, contact us.
+      tags:
+        - currencies
+    parameters: []
+  /orders/:
+    get:
+      operationId: orders_list
+      description: |-
+        ● Description: Returns a list of all Merchant payments in a specific time period.
+
+        ● Header: The ‘X-Device-Id’ from the Merchant. You will find it on Bitnovo Pay Dashbaord.
+
+        ● Input data: There are optional arguments in the url, ‘start’ y ‘end’. With the format YYYY/MM/DD.
+                Example url: https://pos.bitnovo.com/api/v1/orders/?start=2021/01/01&end=2022/01/04
+
+        ● Output data: If it doesn't receive arguments in the url, it will return the payments of the last 7 days.
+                The other option is to return the payments between the two dates given.
+      parameters: []
+      responses:
+        '200':
+          description: Successful operation.
+          schema:
+            $ref: '#/definitions/Payment'
+        '403':
+          description: The authentication credentials where not provided.
+        '500':
+          description: Some internal error happened. Try again or, if the problem persists, contact us.
+      consumes:
+        - multipart/form-data
+      tags:
+        - orders
+    post:
+      operationId: orders_create
+      description: |-
+        ● Description: Create a payment for a Merchant. Depending on the merchant and the fiat amount, front_dni and
+                back_dni images will be required.
+
+        ● Header: The ‘X-Device-Id’ from the Device. You will find it on Bitnovo Pay Dashbaord.
+
+        ● Output data: If it doesn't receive 'input_currency' all the nullable fields won't be returned.
+
+        ● VERY IMPORTANT: There are currencies such as XRP, XLM and ALGO that use TAG/MEMO, in the case of using Api-Gateway, 
+                it is very important to show this information to the client to make the payment. Otherwise, if the customer does not
+                enter the TAG/MEMO along with the address and amount, the customer's funds will be lost.
+      parameters:
+        - name: expected_output_amount
+          in: formData
+          description: Payment amount in fiat (€).
+          required: true
+          type: number
+        - name: input_currency
+          in: formData
+          description: The cryptocurrency that will be use to make the payment.
+          required: false
+          type: string
+        - name: merchant_urlko
+          in: formData
+          description: The redirection url for not completed or expired payments.
+          required: false
+          type: string
+          format: uri
+        - name: merchant_urlok
+          in: formData
+          description: The redirection url for completed payments.
+          required: false
+          type: string
+          format: uri
+        - name: merchant_url_standby
+          in: formData
+          description: The redirection url to wait for payment confirmation.
+          required: false
+          type: string
+          format: uri
+          x-nullable: true
+        - name: notes
+          in: formData
+          description: Product or service description of the payment.
+          required: false
+          type: string
+          maxLength: 512
+        - name: reference
+          in: formData
+          description: Payment reference.
+          required: false
+          type: string
+          maxLength: 256
+          minLength: 1
+        - name: fiat
+          in: formData
+          description: Fiat available.
+          required: false
+          type: string
+          enum:
+            - EUR
+            - USD
+            - GBP
+            - ARS
+            - AUD
+            - BGN
+            - BOB
+            - BRL
+            - CAD
+            - CHF
+            - CLP
+            - COP
+            - DKK
+            - DOP
+            - GEL
+            - HUF
+            - ISK
+            - JPY
+            - KRW
+            - MXN
+            - NOK
+            - NZD
+            - PEN
+            - PLN
+            - PYG
+            - RON
+            - SEK
+            - SGD
+            - SVC
+            - UYU
+          default: EUR
+        - name: language
+          in: formData
+          description: Language.
+          required: false
+          type: string
+          default: ES
+          maxLength: 6
+          minLength: 1
+        - name: front_dni
+          in: formData
+          description: Image NIF (máx. 5MB, recommended 1MB, formats .jpg, .png, .heic). Will be required depending on the merchant and fiat amount.
+          required: false
+          type: file
+        - name: back_dni
+          in: formData
+          description: Image NIF (máx. 5MB, recommended 1MB, formats .jpg, .png, .heic). Will be required depending on the merchant and fiat amount.
+          required: false
+          type: file
+        - name: first_name
+          in: formData
+          description: Name
+          required: false
+          type: string
+          maxLength: 48
+        - name: surnames
+          in: formData
+          description: Surname
+          required: false
+          type: string
+          maxLength: 64
+        - name: address_name
+          in: formData
+          description: Home address
+          required: false
+          type: string
+          maxLength: 256
+        - name: address_additional
+          in: formData
+          description: Address additional info.
+          required: false
+          type: string
+          maxLength: 64
+        - name: address_number
+          in: formData
+          description: Address number
+          required: false
+          type: string
+          maxLength: 56
+        - name: zip_code
+          in: formData
+          description: Zipcode
+          required: false
+          type: string
+          maxLength: 12
+        - name: city
+          in: formData
+          description: City
+          required: false
+          type: string
+          maxLength: 28
+        - name: province
+          in: formData
+          description: Province
+          required: false
+          type: string
+          maxLength: 28
+        - name: country
+          in: formData
+          description: 'Example: "ES". ISO 3166 in Alpha-2 code.'
+          required: false
+          type: string
+          maxLength: 2
+        - name: email
+          in: formData
+          description: Email
+          required: false
+          type: string
+          format: email
+          maxLength: 128
+        - name: phone_number
+          in: formData
+          description: Mobile phone
+          required: false
+          type: string
+          maxLength: 15
+        - name: nif
+          in: formData
+          description: Personal ID
+          required: false
+          type: string
+          maxLength: 12
+        - name: referral_id
+          in: formData
+          description: Referral ID
+          required: false
+          type: string
+          maxLength: 256
+        - name: internal_data
+          in: formData
+          description: Internal data stored by the merchant.
+          required: false
+          type: string
+          maxLength: 1024
+          minLength: 1
+      responses:
+        '200':
+          description: Successful operation.
+          schema:
+            $ref: '#/definitions/ResponseCreatePayment'
+        '403':
+          description: The authentication credentials where not provided.
+        '404':
+          description: |-
+            Invalid currency or minimum amount not reached. 
+
+            Url redirections or symbol missed.
+
+            DNI Image is missed.
+        '500':
+          description: Some internal error happened. Try again or, if the problem persists, contact us.
+      consumes:
+        - multipart/form-data
+      tags:
+        - orders
+    parameters: []
+  /orders/info/{identifier}:
+    get:
+      operationId: orders_info_read
+      description: |-
+        ● Description: Check the information of a specific payment.
+
+        ● Header: The ‘X-Device-Id’ from the Merchant. You will find it on Bitnovo Pay Dashbaord.
+
+        ● Input data: It is required in the url, the "indentifier" of the payment you want to receive the information.
+
+        ● Output data: Returns all the information and transactions of a payment.
+      parameters: []
+      responses:
+        '200':
+          description: Successful operation.
+          schema:
+            $ref: '#/definitions/Payment'
+        '403':
+          description: The authentication credentials where not provided.
+        '500':
+          description: Some internal error happened. Try again or, if the problem persists, contact us.
+      tags:
+        - orders
+    parameters:
+      - name: identifier
+        in: path
+        required: true
+        type: string
+definitions:
+  Currency:
+    type: object
+    properties:
+      symbol:
+        title: Symbol
+        description: Cryptocurrency symbol.
+        type: string
+        maxLength: 24
+        minLength: 1
+      name:
+        title: Name
+        description: Cryptocurrency name.
+        type: string
+        maxLength: 32
+        minLength: 1
+      min_amount:
+        title: Min amount
+        description: Payment minimum amount.
+        type: string
+        format: decimal
+      max_amount:
+        title: Max amount
+        description: Payment maximum amount.
+        type: string
+        format: decimal
+      image:
+        title: Image
+        type: string
+        readOnly: true
+      blockchain:
+        title: Blockchain
+        description: Cryptocurrency blockchain.
+        type: string
+        minLength: 1
+  Transaction:
+    description: List of payment's transactions.
+    type: object
+    properties:
+      confirmed:
+        title: Confirmed
+        description: Indicates if there is any block confirmation in the blockchain.
+        type: boolean
+      currency:
+        title: Currency
+        type: string
+      amount:
+        title: Amount
+        description: Cryptocurrency amount for the payment.
+        type: number
+      tx_hash:
+        title: Tx hash
+        description: Transaction Hash.
+        type: string
+        maxLength: 200
+        minLength: 1
+      block:
+        title: Block
+        description: Transaction Block.
+        type: integer
+        x-nullable: true
+      created_at:
+        title: Created at
+        description: Payment creation date.
+        type: string
+        format: date-time
+  Payment:
+    required:
+      - notes
+    type: object
+    properties:
+      identifier:
+        title: Identifier
+        description: The uuid4 identifier of the payment.
+        type: string
+        format: uuid
+      reference:
+        title: Reference
+        description: Payment reference.
+        type: string
+        maxLength: 256
+        minLength: 1
+        x-nullable: true
+      created_at:
+        title: Created at
+        description: Payment creation date.
+        type: string
+        format: date-time
+      edited_at:
+        title: Edited at
+        description: Payment last edited date.
+        type: string
+        format: date-time
+      status:
+        title: Status
+        description: Payment status.
+        type: string
+        enum:
+          - NR
+          - PE
+          - AC
+          - IA
+          - CO
+          - CA
+          - EX
+          - OC
+          - RF
+          - FA
+          - DE
+      fiat_amount:
+        title: Fiat amount
+        description: Payment amount in fiat (€).
+        type: number
+      crypto_amount:
+        title: Crypto amount
+        description: Cryptocurrency amount for the payment.
+        type: number
+        x-nullable: true
+      unconfirmed_amount:
+        title: Unconfirmed amount
+        description: Amount shown on the mem-pool but not confirmed.
+        type: number
+      confirmed_amount:
+        title: Confirmed amount
+        description: Amount with at least 1 confirmation on the blockchain
+        type: number
+      currency_id:
+        title: Currency id
+        description: Symbol of the cryptocurrency for the payment.
+        type: string
+      merchant_device_id:
+        title: Merchant device id
+        description: Merchant Id.
+        type: integer
+      merchant_device:
+        title: Merchant device
+        description: Merchant name.
+        type: string
+        minLength: 1
+      address:
+        title: Address
+        description: Address that will receive the payment.
+        type: string
+        maxLength: 64
+        minLength: 1
+        x-nullable: true
+      tag_memo:
+        title: Tag memo
+        description: Destination tag or MEMO.
+        type: string
+        x-nullable: true
+      url_ko:
+        title: Url ko
+        description: The redirection url for not completed or expired payments.
+        type: string
+        format: uri
+        x-nullable: true
+      url_ok:
+        title: Url ok
+        description: The redirection url for completed payments.
+        type: string
+        format: uri
+        x-nullable: true
+      url_standby:
+        title: Url standby
+        description: The redirection url to wait for payment confirmation.
+        type: string
+        format: uri
+        x-nullable: true
+      expired_time:
+        title: Expired time
+        description: Payment expiration date.
+        type: string
+        format: date-time
+        x-nullable: true
+      good_fee:
+        title: Good fee
+        description: Indicates if the fee for the transaction is adequate.
+        type: boolean
+      notes:
+        title: Notes
+        description: Product or service description of the payment.
+        type: string
+        maxLength: 512
+        minLength: 1
+      rbf:
+        title: Rbf
+        description: Indicates if a payment can be “Replace by Fee”. Just can be True on BTC.
+        type: boolean
+      safe:
+        title: Safe
+        description: Indicates if the payment is safe.
+        type: boolean
+      fiat:
+        title: Fiat
+        description: Fiat available.
+        type: string
+        enum:
+          - EUR
+          - USD
+          - GBP
+          - ARS
+          - AUD
+          - BGN
+          - BOB
+          - BRL
+          - CAD
+          - CHF
+          - CLP
+          - COP
+          - DKK
+          - DOP
+          - GEL
+          - HUF
+          - ISK
+          - JPY
+          - KRW
+          - MXN
+          - NOK
+          - NZD
+          - PEN
+          - PLN
+          - PYG
+          - RON
+          - SEK
+          - SGD
+          - SVC
+          - UYU
+        default: EUR
+      language:
+        title: Language
+        description: Language.
+        type: string
+        default: ES
+        maxLength: 6
+        minLength: 1
+      percentage:
+        title: Percentage
+        description: Percentage of payment received (%)
+        type: number
+      received_amount:
+        title: Received amount
+        description: Payment received amount in fiat (€).
+        type: number
+      balance_based:
+        title: Balance based
+        description: Indicate if the transaction is balance based.
+        type: string
+        minLength: 1
+      internal_data:
+        title: Internal data
+        description: Internal data stored by the merchant.
+        type: string
+        maxLength: 1024
+        minLength: 1
+      transactions:
+        description: List of payment's transactions.
+        type: array
+        items:
+          $ref: '#/definitions/Transaction'
+  ResponseCreatePayment:
+    type: object
+    properties:
+      identifier:
+        title: Identifier
+        description: The uuid4 identifier of the payment.
+        type: string
+      reference:
+        title: Reference
+        description: Payment reference.
+        type: string
+        maxLength: 256
+        minLength: 1
+        x-nullable: true
+      payment_uri:
+        title: Payment uri
+        description: Address and amount of the cryptocurrency in order to create de QR code.
+        type: string
+        x-nullable: true
+      web_url:
+        title: Web url
+        description: The url of the virtual gateway. (No necessary for physical POS)
+        type: string
+        format: uri
+      address:
+        title: Address
+        description: Address that will receive the payment.
+        type: string
+        x-nullable: true
+      tag_memo:
+        title: Tag memo
+        description: Destination tag or MEMO.
+        type: string
+        x-nullable: true
+      input_currency:
+        title: Input currency
+        description: Payment's cryptocurrency symbol.
+        type: string
+        x-nullable: true
+      expected_input_amount:
+        title: Expected input amount
+        description: Payment's cryptocurrency amount.
+        type: number
+        x-nullable: true
+      rate:
+        title: Rate
+        description: Price of the cryptocurrency in fiat (€).
+        type: number
+        x-nullable: true
+      notes:
+        title: Notes
+        description: Product or service description of the payment.
+        type: string
+      fiat:
+        title: Fiat
+        description: Fiat available.
+        type: string
+        enum:
+          - EUR
+          - USD
+          - GBP
+          - ARS
+          - AUD
+          - BGN
+          - BOB
+          - BRL
+          - CAD
+          - CHF
+          - CLP
+          - COP
+          - DKK
+          - DOP
+          - GEL
+          - HUF
+          - ISK
+          - JPY
+          - KRW
+          - MXN
+          - NOK
+          - NZD
+          - PEN
+          - PLN
+          - PYG
+          - RON
+          - SEK
+          - SGD
+          - SVC
+          - UYU
+        default: EUR
+      language:
+        title: Language
+        description: Language.
+        type: string
+        default: ES
+        maxLength: 6
+        minLength: 1
