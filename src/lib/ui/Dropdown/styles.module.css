@@ -1,0 +1,7 @@
+.dropdown {
+  width: 100%;
+}
+
+.dropdown > *:last-child {
+  margin-top: 8px;
+}
