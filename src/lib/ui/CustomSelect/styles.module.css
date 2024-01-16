@@ -1,0 +1,41 @@
+.root {
+  position: relative;
+}
+
+.select {
+  display: flex;
+  padding: 18px 16px;
+  align-items: center;
+  gap: 8px;
+  justify-content: space-between;
+
+  border-radius: 6px;
+  border: 1px solid var(--co-text-background-dark);
+  background: var(--co-light);
+}
+
+.select:hover {
+  cursor: pointer;
+}
+
+.options {
+  width: 100%;
+  position: absolute;
+  top: calc(100% + 8px);
+  border: 1px solid var(--co-text-background-light);
+  border-radius: 6px;
+  box-shadow: 0px 4px 8px 0px #60617029, 0px 0px 2px 0px #28293d0a;
+  background-color: var(--co-light);
+}
+
+.options li {
+  padding: 18px 16px;
+}
+
+.options li:not(:first-child) {
+  border-top: 1px solid #d3dce6;
+}
+
+.options li:hover {
+  cursor: pointer;
+}
