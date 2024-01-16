@@ -1,0 +1,13 @@
+.root {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.text {
+  color: var(--co-primary-darker);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: 0.14px;
+}
