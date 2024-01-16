@@ -1,5 +1,10 @@
 :root {
   --co-light: #fff;
+  --co-primary-darker: #002859;
+  --co-background-light: #e5e9f2;
+  --co-background-dark: #647184;
+  --co-text-background-light: #d3dce6;
+  --co-text-background-dark: #c0ccda;
 }
 
 * {
@@ -16,11 +21,11 @@ body {
 
 body {
   background-color: var(--co-light);
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
 }
 
 a {
