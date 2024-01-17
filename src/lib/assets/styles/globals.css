@@ -1,7 +1,11 @@
 :root {
   --co-light: #fff;
-  --co-primary-darker: #002859;
+  --co-primary-lighter: #002859;
+  --co-primary-darker: #003c85;
+  --co-primary-day-softer: #c6dffe;
+  --co-primary-day-lighter: #035ac5;
   --co-background-light: #e5e9f2;
+  --co-background-day-light: #eff2f7;
   --co-background-dark: #647184;
   --co-text-background-light: #d3dce6;
   --co-text-background-dark: #c0ccda;

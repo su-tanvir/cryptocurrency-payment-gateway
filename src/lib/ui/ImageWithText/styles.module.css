@@ -5,7 +5,7 @@
 }
 
 .text {
-  color: var(--co-primary-darker);
+  color: var(--co-primary-lighter);
   font-size: 14px;
   font-weight: 400;
   line-height: 20px;
