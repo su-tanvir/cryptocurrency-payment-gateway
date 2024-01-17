@@ -23,7 +23,7 @@ export const Input: FC<InputProps> = ({
   ...props
 }) => {
   return (
-    <div className={styles.root}>
+    <div className={`${styles.root} ${styles[state]}`}>
       {startIcon && <Icon name="search" />}
       <input
         id={id}
