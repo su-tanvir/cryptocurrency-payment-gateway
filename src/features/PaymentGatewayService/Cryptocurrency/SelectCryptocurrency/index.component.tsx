@@ -2,26 +2,17 @@ import { CloseIcon } from "@/lib/assets/icons/icons";
 import Button from "@/lib/ui/Button";
 import { FC, useState } from "react";
 import PickCryptocurrency from "../PickCryptocurrency/index.component";
-import { Cryptocurrencies, Cryptocurrency } from "../types";
+import { useCryptocurrency } from "../useCryptocurrency";
 import styles from "./styles.module.css";
 
-interface SelectCryptocurrencyProps {
-  initialCryptoId?: string;
-  cryptocurrencies: Cryptocurrencies;
-  onSelect: (crypto?: Cryptocurrency) => void;
-}
-
-const SelectCryptocurrency: FC<SelectCryptocurrencyProps> = ({
-  initialCryptoId,
-  cryptocurrencies,
-  onSelect,
-}) => {
+const SelectCryptocurrency: FC = () => {
+  const { toggleCryptoSelectable } = useCryptocurrency();
   const [isClosing, setIsClosing] = useState(false);
 
-  const handleOnClose = (crypto?: Cryptocurrency) => {
+  const handleOnClose = () => {
     setIsClosing(true);
     setTimeout(function () {
-      onSelect(crypto);
+      toggleCryptoSelectable();
     }, 450);
   };
 
@@ -34,11 +25,7 @@ const SelectCryptocurrency: FC<SelectCryptocurrencyProps> = ({
             <CloseIcon />
           </Button>
         </div>
-        <PickCryptocurrency
-          initialCryptoId={initialCryptoId}
-          cryptocurrencies={cryptocurrencies}
-          onSelect={handleOnClose}
-        />
+        <PickCryptocurrency onClose={handleOnClose} />
       </div>
     </div>
   );

@@ -3,37 +3,39 @@ import Button from "@/lib/ui/Button";
 import Image from "@/lib/ui/Image";
 import TextField from "@/lib/ui/TextField";
 import { FC, useState } from "react";
-import { Cryptocurrencies, Cryptocurrency } from "../types";
+import { useOrder } from "../../Order/useOrder";
+import { Cryptocurrency } from "../types";
+import { useCryptocurrency } from "../useCryptocurrency";
 import styles from "./styles.module.css";
 
 interface PickCryptocurrencyProps {
-  initialCryptoId?: string;
-  cryptocurrencies: Cryptocurrencies;
-  onSelect: (crypto?: Cryptocurrency) => void;
+  onClose: () => void;
 }
 
-const PickCryptocurrency: FC<PickCryptocurrencyProps> = ({
-  initialCryptoId,
-  cryptocurrencies,
-  onSelect,
-}) => {
+const PickCryptocurrency: FC<PickCryptocurrencyProps> = ({ onClose }) => {
+  const { cryptocurrencies } = useCryptocurrency();
+  const { cryptocurrency, setData } = useOrder();
+
   const [selectedCrypto, setSelectedCrypto] = useState(
-    cryptocurrencies.find((crypto) => crypto.name === initialCryptoId)
+    cryptocurrencies?.find((crypto) => crypto.name === cryptocurrency?.name)
   );
   const [cryptocurrenciesFiltered, setCryptocurrenciesFiltered] =
     useState(cryptocurrencies);
 
   const handleSearchWord = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setCryptocurrenciesFiltered(
-      cryptocurrencies.filter((crypto) =>
-        crypto.name.toLowerCase().includes(e.target.value.toLowerCase())
-      )
-    );
+    if (cryptocurrencies) {
+      setCryptocurrenciesFiltered(
+        cryptocurrencies.filter((crypto) =>
+          crypto.name.toLowerCase().includes(e.target.value.toLowerCase())
+        )
+      );
+    }
   };
 
   const handleCryptoSelected = (crypto: Cryptocurrency) => {
     setSelectedCrypto(crypto);
-    onSelect(crypto);
+    setData("cryptocurrency", crypto);
+    onClose();
   };
 
   return (
@@ -44,7 +46,7 @@ const PickCryptocurrency: FC<PickCryptocurrencyProps> = ({
         placeholder="Buscar"
         onChange={handleSearchWord}
       />
-      {cryptocurrenciesFiltered.length > 0 && (
+      {cryptocurrenciesFiltered && cryptocurrenciesFiltered.length > 0 && (
         <ul className={styles.list}>
           {cryptocurrenciesFiltered.map((crypto) => (
             <li key={crypto.name} className={styles.item}>

@@ -1,5 +1,6 @@
 import { mulish } from "@/lib/assets/fonts/googleFonts";
 import "@/lib/assets/styles/globals.css";
+import styles from "./layout.module.css";
 
 export default function RootLayout({
   children,
@@ -14,7 +15,10 @@ export default function RootLayout({
         <link rel="icon" href="/icon.png" type="image/x-icon" sizes="24x24" />
       </head>
       <body className={mulish.className}>
-        <main>{children}</main>
+        <div className={styles.app}>
+          {children}
+          <footer>I amd Bitnovo footer</footer>
+        </div>
       </body>
     </html>
   );
