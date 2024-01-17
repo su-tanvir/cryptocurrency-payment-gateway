@@ -9,6 +9,7 @@
   --co-background-dark: #647184;
   --co-text-background-light: #d3dce6;
   --co-text-background-dark: #c0ccda;
+  --co-error: #dc2626;
 }
 
 * {
