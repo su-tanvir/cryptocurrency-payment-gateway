@@ -1,0 +1,31 @@
+.root {
+  display: flex;
+  padding: 18px 12px;
+  align-items: center;
+  gap: 8px;
+  align-self: stretch;
+
+  border-radius: 6px;
+  border: 1px solid var(--co-background-light);
+  background: var(--co-light);
+}
+
+.input {
+  width: 100%;
+  border: none;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: 0.14px;
+  color: var(--co-primary-lighter);
+}
+
+.input::placeholder {
+  color: var(--co-background-dark);
+}
+
+.root:has(.input:focus-visible),
+.input:focus-visible {
+  outline: none;
+  border-color: var(--co-text-background-dark);
+}

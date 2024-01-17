@@ -1,16 +1,9 @@
-import { DetailedHTMLProps, FC, InputHTMLAttributes } from "react";
+import { FC } from "react";
+import Input, { InputProps } from "../Input";
 import Label from "../Label";
 import styles from "./styles.module.css";
 
-type TextFieldState = "default" | "error";
-
-interface TextFieldProps
-  extends DetailedHTMLProps<
-    InputHTMLAttributes<HTMLInputElement>,
-    HTMLInputElement
-  > {
-  id: string;
-  state?: TextFieldState;
+interface TextFieldProps extends InputProps {
   label?: string;
 }
 
@@ -19,20 +12,14 @@ export const TextField: FC<TextFieldProps> = ({
   id,
   state = "default",
   label,
-  placeholder,
-  required,
   ...props
 }) => {
   return (
     <div className={styles.root}>
       {label && <Label htmlFor={id}>{label}</Label>}
-      <input
-        id={id}
-        type={type}
-        className={styles.input}
-        placeholder={placeholder}
-        {...props}
-      />
+      <div className={styles.wrapper}>
+        <Input id={id} type={type} {...props} />
+      </div>
     </div>
   );
 };
