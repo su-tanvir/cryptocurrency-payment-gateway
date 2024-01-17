@@ -1,0 +1,38 @@
+.button {
+  appearance: none;
+  background-color: transparent;
+  border: none;
+}
+
+.button.native {
+  border-radius: 0;
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+
+.button.primary {
+  padding: 18px 24px;
+  border-radius: 6px;
+  background-color: var(--co-primary-day-lighter);
+}
+
+.button.primary:disabled {
+  background-color: var(--co-primary-day-softer);
+}
+
+.button.default {
+  width: auto;
+}
+
+.button.large {
+  width: 100%;
+}
+
+.button:hover {
+  cursor: pointer;
+}
+
+.button.primary:hover:not(:disabled) {
+  background-color: var(--co-primary-darker);
+}
