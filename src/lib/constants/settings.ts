@@ -6,3 +6,5 @@ export const CHECKOUT_PATH = "/checkout";
 export const CHECKOUT_CONFIRMATION_PATH = "/checkout/confirmation";
 export const CHECKOUT_OK_PATH = "/checkout/ok";
 export const CHECKOUT_KO_PATH = "/checkout/ko";
+
+export const BASE_WEB_SOCKET_URL = process.env.NEXT_PUBLIC_WS_URL;

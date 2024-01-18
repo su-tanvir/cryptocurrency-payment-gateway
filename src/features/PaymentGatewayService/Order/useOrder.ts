@@ -1,3 +1,4 @@
+import useOrderTracking from "@/features/PaymentGatewayService/Order/useOrderTracking";
 import { useEffect } from "react";
 import { useCryptocurrency } from "../Cryptocurrency/useCryptocurrency";
 import { useOrderStore } from "./order.store";
@@ -13,6 +14,7 @@ export const useOrder = () => {
     orderLine,
   } = useOrderStore();
   const { initialCrypto } = useCryptocurrency();
+  useOrderTracking(orderLine?.identifier);
 
   useEffect(() => {
     if (!cryptocurrency && initialCrypto) {
