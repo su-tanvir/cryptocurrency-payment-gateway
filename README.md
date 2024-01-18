@@ -9,8 +9,9 @@
 
 ## Tools
 
-- Framework Nextjs (v14) with React[TS]
-- CSS Modules
+- Pages route with Nextjs (v14)
+- UI with React[TS] + CSS Modules
+- Store management with Zustand
 - [Bitnovo API](./doc/api.yaml)
 
 ## Getting started
@@ -30,4 +31,6 @@
 
 ## Notes
 
+- Rendering mode: CSR
 - Use of **Screaming architecture** based on features
+- Applied following patterns: compound + hooks + render props
