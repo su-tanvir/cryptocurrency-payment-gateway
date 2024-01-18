@@ -1,3 +1,7 @@
+import {
+  CHECKOUT_CONFIRMATION_PATH,
+  CHECKOUT_KO_PATH,
+} from "@/lib/constants/settings";
 import Button from "@/lib/ui/Button";
 import Dropdown from "@/lib/ui/Dropdown";
 import LabelWithIcon from "@/lib/ui/LabelWithIcon";
@@ -15,7 +19,10 @@ const OrderForm: FC = () => {
   const [error, setError] = useState<string | undefined>(undefined);
 
   if (status === "created") {
-    redirect("/checkout/confirmation");
+    redirect(CHECKOUT_CONFIRMATION_PATH);
+  }
+  if (status === "error") {
+    redirect(CHECKOUT_KO_PATH);
   }
 
   return (
@@ -56,7 +63,7 @@ const OrderForm: FC = () => {
           />
         }
         value={{
-          name: cryptocurrency?.name || "",
+          name: cryptocurrency?.symbol || "",
           value: cryptocurrency?.image || "",
         }}
         onClick={toggleCryptoSelectable}
@@ -88,7 +95,14 @@ const OrderForm: FC = () => {
       <Button
         variant="primary"
         size="large"
-        disabled={Boolean(error) || !amount || !cryptocurrency || !concept}
+        disabled={
+          status === "loading" ||
+          Boolean(error) ||
+          !amount ||
+          !cryptocurrency ||
+          !concept
+        }
+        isLoading={status === "loading"}
         onClick={createOrder}
       >
         <h6 className={styles.cta}>Continuar</h6>

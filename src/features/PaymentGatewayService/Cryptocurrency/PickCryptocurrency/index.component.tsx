@@ -17,7 +17,7 @@ const PickCryptocurrency: FC<PickCryptocurrencyProps> = ({ onClose }) => {
   const { cryptocurrency, setData } = useOrder();
 
   const [selectedCrypto, setSelectedCrypto] = useState(
-    cryptocurrencies?.find((crypto) => crypto.name === cryptocurrency?.name)
+    cryptocurrencies?.find((crypto) => crypto.symbol === cryptocurrency?.symbol)
   );
   const [cryptocurrenciesFiltered, setCryptocurrenciesFiltered] =
     useState(cryptocurrencies);
@@ -49,7 +49,7 @@ const PickCryptocurrency: FC<PickCryptocurrencyProps> = ({ onClose }) => {
       {cryptocurrenciesFiltered && cryptocurrenciesFiltered.length > 0 && (
         <ul className={styles.list}>
           {cryptocurrenciesFiltered.map((crypto) => (
-            <li key={crypto.name} className={styles.item}>
+            <li key={crypto.symbol} className={styles.item}>
               <Button
                 className={styles.cryptocurrency}
                 onClick={() => handleCryptoSelected(crypto)}
@@ -57,13 +57,13 @@ const PickCryptocurrency: FC<PickCryptocurrencyProps> = ({ onClose }) => {
                 <Image
                   className={styles.img}
                   src={crypto.image}
-                  alt={crypto.name}
+                  alt={crypto.symbol}
                 />
                 <div className={styles.info}>
                   <strong className={styles.name}>{crypto.name}</strong>
                   <p className={styles.symbol}>{crypto.symbol}</p>
                 </div>
-                {selectedCrypto?.name === crypto.name ? (
+                {selectedCrypto?.symbol === crypto.symbol ? (
                   <TickIcon />
                 ) : (
                   <ArrowRightIcon />

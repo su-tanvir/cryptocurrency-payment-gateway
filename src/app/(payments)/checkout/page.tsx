@@ -18,7 +18,7 @@ export default function CheckoutPage() {
     <main className={styles.root}>
       <Frame>
         {status === "loading" || status === "idle" ? (
-          <Loader />
+          <Loader type="dots" className={styles.loader} />
         ) : status === "error" ? (
           <AlertMessage
             severity="error"

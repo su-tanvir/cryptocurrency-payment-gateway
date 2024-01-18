@@ -3,8 +3,15 @@ import { useCryptocurrency } from "../Cryptocurrency/useCryptocurrency";
 import { useOrderStore } from "./order.store";
 
 export const useOrder = () => {
-  const { status, amount, cryptocurrency, concept, setData, createOrder } =
-    useOrderStore();
+  const {
+    status,
+    amount,
+    cryptocurrency,
+    concept,
+    setData,
+    createOrder,
+    orderLine,
+  } = useOrderStore();
   const { initialCrypto } = useCryptocurrency();
 
   useEffect(() => {
@@ -20,5 +27,6 @@ export const useOrder = () => {
     concept,
     setData,
     createOrder,
+    orderLine,
   };
 };
