@@ -70,7 +70,7 @@ export const useOrderStore = create<InitialState>((set, get) => {
           fiatAmount: orderInfo.fiat_amount,
           cryptocurrency: cryptocurrency,
           createdAt: orderInfo.created_at,
-          expirationTime: orderInfo.expired_time,
+          expirationDateTime: orderInfo.expired_time,
           notes: orderInfo.notes,
           cryptoAmount: orderInfo.crypto_amount,
           address: orderInfo.address,

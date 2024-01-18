@@ -71,7 +71,7 @@ export interface OrderLine {
   fiatAmount: number;
   cryptocurrency: Cryptocurrency;
   createdAt: string;
-  expirationTime: string;
+  expirationDateTime: string;
   notes: string;
   cryptoAmount: number;
   address: string | null;

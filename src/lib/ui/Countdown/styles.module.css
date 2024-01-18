@@ -1,0 +1,14 @@
+.root {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+.timer {
+  color: var(--co-primary-lighter);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 20px;
+}
