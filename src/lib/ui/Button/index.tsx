@@ -1,4 +1,5 @@
 import { ButtonHTMLAttributes, FC } from "react";
+import Loader from "../Loader";
 import styles from "./styles.module.css";
 
 type ButtonVariant = "native" | "primary";
@@ -8,12 +9,14 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: ButtonVariant;
   size?: ButtonSize;
   className?: string;
+  isLoading?: boolean;
 }
 
 const Button: FC<ButtonProps> = ({
   type = "button",
   variant = "native",
   size = "default",
+  isLoading,
   children,
   className = "",
   ...props
@@ -23,6 +26,7 @@ const Button: FC<ButtonProps> = ({
     className={`${styles.button} ${styles[variant]} ${styles[size]} ${className}`}
     {...props}
   >
+    {isLoading && <Loader type="spinner" />}
     {children}
   </button>
 );

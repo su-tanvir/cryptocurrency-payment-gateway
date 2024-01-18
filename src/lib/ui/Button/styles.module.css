@@ -2,6 +2,11 @@
   appearance: none;
   background-color: transparent;
   border: none;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 25px;
 }
 
 .button.native {
