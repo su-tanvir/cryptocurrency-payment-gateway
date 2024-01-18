@@ -1,0 +1,8 @@
+.frame {
+  max-width: 490px;
+  padding: 32px;
+}
+
+.button {
+  color: var(--co-light);
+}
