@@ -9,7 +9,6 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "multicoin-address-validator": "^0.5.15",
     "next": "14.0.4",
     "qrcode.react": "^3.1.0",
     "react": "^18",
