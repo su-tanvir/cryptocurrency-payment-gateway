@@ -1,3 +1,5 @@
+import { Cryptocurrency } from "../Cryptocurrency/types";
+
 export type OrderStatus = "draft" | "loading" | "created" | "error";
 
 export interface CreateOrderRequestDTO {
@@ -67,7 +69,7 @@ export interface OrderLine {
   status: OrderLineStatus;
   fiat: string;
   fiatAmount: number;
-  cryptocurrencyId: string;
+  cryptocurrency: Cryptocurrency;
   createdAt: string;
   expirationTime: string;
   notes: string;

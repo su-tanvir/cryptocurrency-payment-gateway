@@ -5,6 +5,7 @@ import {
   CHECKOUT_KO_PATH,
   CHECKOUT_OK_PATH,
 } from "@/lib/constants/settings";
+import { convertStringToNumber } from "@/lib/utils/stringTools";
 import { create } from "zustand";
 import { Cryptocurrency } from "../Cryptocurrency/types";
 import {
@@ -18,13 +19,13 @@ type OrderDataKey = keyof InitialState;
 
 interface InitialState {
   status: OrderStatus;
-  amount: number | null;
+  amount: string | null;
   cryptocurrency: Cryptocurrency | undefined;
   concept: string | null;
   orderLine: OrderLine | null;
   setData: (
     key: OrderDataKey,
-    value: OrderStatus | number | Cryptocurrency | string | number
+    value: OrderStatus | Cryptocurrency | string
   ) => void;
   createOrder: () => void;
 }
@@ -50,7 +51,7 @@ export const useOrderStore = create<InitialState>((set, get) => {
 
       try {
         const order = await createPaymentOrderFromApi({
-          expected_output_amount: amount,
+          expected_output_amount: convertStringToNumber(amount),
           fiat: EUROPEAN_FIAT,
           input_currency: cryptocurrency.symbol,
           notes: concept,
@@ -61,12 +62,13 @@ export const useOrderStore = create<InitialState>((set, get) => {
         });
 
         const orderInfo = await getPaymentOrderInfoFromApi(order.identifier);
+
         const orderLine: OrderLine = {
           identifier: orderInfo.identifier,
           status: transformCodeToOrderLineStatus(orderInfo.status),
           fiat: orderInfo.fiat,
           fiatAmount: orderInfo.fiat_amount,
-          cryptocurrencyId: orderInfo.currency_id,
+          cryptocurrency: cryptocurrency,
           createdAt: orderInfo.created_at,
           expirationTime: orderInfo.expired_time,
           notes: orderInfo.notes,

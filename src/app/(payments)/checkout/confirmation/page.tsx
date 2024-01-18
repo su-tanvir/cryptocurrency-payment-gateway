@@ -1,4 +1,5 @@
 "use client";
+import DetailOrderSummary from "@/features/PaymentGatewayService/Order/DetailOrderSummary";
 import { useOrder } from "@/features/PaymentGatewayService/Order/useOrder";
 import styles from "./page.module.css";
 
@@ -7,9 +8,18 @@ export default function ConfirmationPage() {
 
   if (!orderLine) return;
 
+  const { fiatAmount, fiat, cryptocurrency, createdAt, notes } = orderLine;
+
   return (
     <main className={styles.root}>
-      <p>Resumen del pedido</p>
+      <DetailOrderSummary
+        amount={fiatAmount}
+        fiat={fiat}
+        cryptocurrency={cryptocurrency}
+        createdDate={createdAt}
+        notes={notes}
+      />
+
       <p>Realizar el pago</p>
     </main>
   );

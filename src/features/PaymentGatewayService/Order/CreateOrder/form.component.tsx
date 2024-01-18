@@ -33,7 +33,7 @@ const OrderForm: FC = () => {
         value={amount || ""}
         label="Importe a pagar"
         placeholder="Añade importe a pagar"
-        pattern="^[0-9,]+$"
+        pattern="^\d+(\,\d{1,2})?$"
         onChange={(e) => {
           if (!isNaN(+e.target.value)) {
             if (!cryptocurrency) return;

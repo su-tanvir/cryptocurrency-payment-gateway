@@ -1,0 +1,88 @@
+.root {
+  width: 100%;
+  max-width: 580px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+}
+
+.title {
+  color: var(--co-primary-lighter);
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 25px;
+}
+
+.content {
+  width: 100%;
+  padding: 32px;
+  border-radius: 16px;
+  background: var(--co-background-day-lighter);
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+}
+
+.item {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.item:not(:last-child) {
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--co-text-background-dark);
+}
+
+.item:has(.sublist) {
+  padding-bottom: 0;
+}
+
+.sublist {
+  width: 100%;
+}
+
+.sublist .item {
+  border-bottom: none;
+  padding-bottom: 30px;
+}
+
+.highlighted {
+  color: var(--co-primary-lighter);
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 22px;
+}
+
+.description {
+  color: var(--co-primary-lighter);
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 16px;
+}
+
+.crypto,
+.trade {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.crypto {
+  gap: 10px;
+}
+.trade {
+  gap: 2px;
+}
+
+.descriptionText {
+  color: var(--co-primary-lighter);
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 20px;
+}
