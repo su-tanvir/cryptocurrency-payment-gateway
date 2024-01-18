@@ -2,13 +2,15 @@
 import DetailOrderSummary from "@/features/PaymentGatewayService/Order/DetailOrderSummary";
 import { useOrder } from "@/features/PaymentGatewayService/Order/useOrder";
 import MakePayment from "@/features/PaymentGatewayService/Payment/MakePayment";
+import { CHECKOUT_PATH } from "@/lib/constants/settings";
+import { redirect } from "next/navigation";
 import { Toaster } from "sonner";
 import styles from "./page.module.css";
 
 export default function ConfirmationPage() {
   const { orderLine } = useOrder();
 
-  if (!orderLine) return;
+  if (!orderLine) redirect(CHECKOUT_PATH);
 
   const {
     fiatAmount,
