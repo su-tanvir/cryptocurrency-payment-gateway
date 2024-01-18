@@ -2,6 +2,7 @@
 import DetailOrderSummary from "@/features/PaymentGatewayService/Order/DetailOrderSummary";
 import { useOrder } from "@/features/PaymentGatewayService/Order/useOrder";
 import MakePayment from "@/features/PaymentGatewayService/Payment/MakePayment";
+import { Toaster } from "sonner";
 import styles from "./page.module.css";
 
 export default function ConfirmationPage() {
@@ -24,6 +25,7 @@ export default function ConfirmationPage() {
 
   return (
     <main className={styles.root}>
+      <Toaster position="top-right" richColors />
       <DetailOrderSummary
         amount={fiatAmount}
         fiat={fiat}
@@ -31,7 +33,6 @@ export default function ConfirmationPage() {
         createdDate={createdAt}
         notes={notes}
       />
-
       <MakePayment
         expirationDateTime={expirationDateTime}
         cryptoSymbol={cryptocurrency.symbol}

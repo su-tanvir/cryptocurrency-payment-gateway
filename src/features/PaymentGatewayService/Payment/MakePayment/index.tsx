@@ -2,6 +2,7 @@ import Countdown from "@/lib/ui/Countdown";
 import Frame from "@/lib/ui/Frame";
 import { FC } from "react";
 import ChoosePayment from "../ChoosePayment";
+import PaymentInformation from "../PaymentInformation";
 import styles from "./styles.module.css";
 
 interface MakePaymentProps {
@@ -30,6 +31,11 @@ const MakePayment: FC<MakePaymentProps> = ({
           <ChoosePayment
             cryptoSymbol={cryptoSymbol}
             cryptoAddress={paymentQrUri}
+          />
+          <PaymentInformation
+            cryptoAmount={cryptoAmount}
+            address={address}
+            tagMemo={tagMemo}
           />
         </div>
       </Frame>

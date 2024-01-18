@@ -55,7 +55,6 @@ const DetailOrderSummary: FC<DetailOrderSummaryProps> = ({
               </li>
             </ul>
           </li>
-
           <li className={styles.item}>
             <p className={styles.description}>Concepto:</p>
             <h6 className={styles.descriptionText}>{notes}</h6>

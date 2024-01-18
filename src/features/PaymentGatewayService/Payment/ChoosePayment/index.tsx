@@ -1,6 +1,6 @@
 import Button from "@/lib/ui/Button";
 import { FC, useState } from "react";
-import { Toaster, toast } from "sonner";
+import { toast } from "sonner";
 import GeneratePaymentQrWalletAddress from "../GeneratePaymentQrWalletAddress";
 import { PaymentType } from "../types";
 import styles from "./styles.module.css";
@@ -26,7 +26,6 @@ const ChoosePayment: FC<ChoosePaymentProps> = ({
 
   return (
     <div className={styles.root}>
-      <Toaster position="top-right" richColors />
       <div className={styles.actions}>
         <Button
           className={`${styles.button} ${
