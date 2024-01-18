@@ -1,9 +1,16 @@
 import styles from "./styles.module.css";
 
-export const Loader = () => {
+type LoaderType = "dots" | "spinner";
+
+interface LoaderProps {
+  type: LoaderType;
+  className?: string;
+}
+
+export const Loader = ({ type, className }: LoaderProps) => {
   return (
-    <div className={styles.root}>
-      <div className={styles.loader} />
+    <div className={`${styles.root} ${className}`}>
+      <div className={styles[`loader-${type}`]} />
     </div>
   );
 };

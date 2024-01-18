@@ -1,11 +1,10 @@
 .root {
   display: grid;
   place-content: center;
-  min-height: 200px;
   height: 100%;
 }
 
-.loader {
+.loader-dots {
   color: var(--co-primary-day-lighter);
   width: 4px;
   aspect-ratio: 1;
@@ -21,5 +20,27 @@
   }
   100% {
     box-shadow: 19px 0 0 0, 38px 0 0 3px, 57px 0 0 7px;
+  }
+}
+
+.loader-spinner {
+  --d: 10.6px;
+  width: 1.9px;
+  height: 1.9px;
+  border-radius: 50%;
+  color: var(--co-light);
+  box-shadow: calc(1 * var(--d)) calc(0 * var(--d)) 0 0,
+    calc(0.707 * var(--d)) calc(0.707 * var(--d)) 0 0.5px,
+    calc(0 * var(--d)) calc(1 * var(--d)) 0 1px,
+    calc(-0.707 * var(--d)) calc(0.707 * var(--d)) 0 1.4px,
+    calc(-1 * var(--d)) calc(0 * var(--d)) 0 1.9px,
+    calc(-0.707 * var(--d)) calc(-0.707 * var(--d)) 0 2.4px,
+    calc(0 * var(--d)) calc(-1 * var(--d)) 0 2.9px;
+  animation: full-circle-rotation 1s infinite steps(8);
+}
+
+@keyframes full-circle-rotation {
+  100% {
+    transform: rotate(1turn); /* 360 degrees */
   }
 }
