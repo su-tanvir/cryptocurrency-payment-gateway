@@ -1,5 +1,5 @@
 import { BASE_API_URL } from "@/lib/constants/settings";
-import { makeApiCall } from "@/lib/utils/apiCall";
+import { makeApiCall } from "@/lib/utils/apiService";
 import { CreateOrderRequestDTO, CreateOrderResponseDTO } from "./types";
 
 export const createPaymentOrderFromApi = async (

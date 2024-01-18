@@ -1,10 +1,10 @@
-import { ApiCallStatus } from "@/lib/types/common";
+import { ServiceStatus } from "@/lib/types/common";
 import { create } from "zustand";
-import { getCryptoCurrenciesFromApi } from "./cryptocurrency.api";
+import { getCryptoCurrenciesFromApi } from "./cryptocurrency.service";
 import { Cryptocurrencies } from "./types";
 
 interface InitialState {
-  status: ApiCallStatus;
+  status: ServiceStatus;
   cryptocurrencies: Cryptocurrencies | null;
   isCryptoSelectable: boolean;
   getCryptocurrencies: () => void;

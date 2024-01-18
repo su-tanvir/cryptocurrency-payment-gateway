@@ -1,7 +1,7 @@
 import { BASE_APP_URL } from "@/lib/constants/settings";
 import { create } from "zustand";
 import { Cryptocurrency } from "../Cryptocurrency/types";
-import { createPaymentOrderFromApi } from "./order.api";
+import { createPaymentOrderFromApi } from "./order.service";
 import { OrderStatus } from "./types";
 
 type OrderDataKey = keyof InitialState;

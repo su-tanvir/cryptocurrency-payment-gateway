@@ -5,4 +5,4 @@ export interface NameValue<T> {
   value: T;
 }
 
-export type ApiCallStatus = "idle" | "loading" | "success" | "error";
+export type ServiceStatus = "idle" | "loading" | "success" | "error";
