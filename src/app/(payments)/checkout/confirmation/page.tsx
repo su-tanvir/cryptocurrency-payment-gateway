@@ -17,6 +17,7 @@ export default function ConfirmationPage() {
     notes,
     expirationDateTime,
     cryptoAmount,
+    paymentUri,
     address,
     tagMemo,
   } = orderLine;
@@ -33,6 +34,8 @@ export default function ConfirmationPage() {
 
       <MakePayment
         expirationDateTime={expirationDateTime}
+        cryptoSymbol={cryptocurrency.symbol}
+        paymentQrUri={paymentUri}
         cryptoAmount={cryptoAmount}
         address={address}
         tagMemo={tagMemo}
