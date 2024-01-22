@@ -2,16 +2,16 @@
 
 - **Goal**: create a cryptocurrency payment gateway in a test environment
 - **System functional requirement**
-  - [ ] Create payment order with a currency
-  - Confirm payment with
-    - [ ] Smart QR
-    - [ ] Web3
+  - [x] Create payment order with a currency
+  - [x] Confirm payment with
+    - Smart QR (considering WebSocket)
+    - <del>Web3</del>
 
 ## Tools
 
-- Pages route with Nextjs (v14)
-- UI with React[TS] + CSS Modules
-- Store management with Zustand
+- Pages route with **Nextjs** (v14)
+- UI with **React[TS]** + **CSS** Modules
+- Store management with **Zustand**
 - [Bitnovo API](./doc/api.yaml)
 
 ## Getting started
@@ -29,8 +29,22 @@
   npm run dev
   ```
 
+## Local demo
+
+- [Demo](./doc/demo.mkv)
+
+## Production
+
+<div align="center">
+  <a href="https://crypto-payment-service.vercel.app" target="_blank">
+    <img alt="App" src="./doc/app.png" >
+  </a>
+  <p>Make your payment with cryptocurrency.</p>
+  <a href="https://crypto-payment-service.vercel.app"><strong>Explore the app »</strong></a>
+</div>
+
 ## Notes
 
-- Rendering mode: CSR
+- Rendering mode: **CSR**
 - Use of **Screaming architecture** based on features
-- Applied following patterns: compound + hooks + render props
+- Applied following **patterns**: compound + hooks + render props

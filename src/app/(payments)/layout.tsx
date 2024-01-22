@@ -17,7 +17,7 @@ export default function RootLayout({
       <body className={mulish.className}>
         <div className={styles.app}>
           {children}
-          <footer>I am Bitnovo footer</footer>
+          <footer>Developed by Tanvir</footer>
         </div>
       </body>
     </html>
